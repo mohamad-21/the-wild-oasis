@@ -142,7 +142,13 @@ export default function DurationChart({ stays }) {
     <ChartBox>
       <ResponsiveContainer>
         <PieChart>
-          <Pie data={startData} dataKey='value' nameKey='duration' outerRadius={50} innerRadius={50}>
+          <Pie
+            data={startData}
+            dataKey='value'
+            nameKey='duration'
+            innerRadius='45%'
+            outerRadius='70%'
+          >
             {startData.map(data => (
               <Cell fill={data.color} key={data.duration} />
             ))}

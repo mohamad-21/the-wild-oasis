@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import Tag from '../../ui/Tag';
+import Button from '../../ui/Button';
+import { Flag } from '../../ui/Flag';
+import { Link } from "react-router-dom";
+import CheckoutButton from "./CheckoutButton";
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -18,3 +23,21 @@ const StyledTodayItem = styled.li`
 const Guest = styled.div`
   font-weight: 500;
 `;
+
+export default function TodayItem({ activity }) {
+  const { id, status, guests, numNights } = activity;
+
+  return (
+    <StyledTodayItem>
+      {status === 'unconfirmed' && (
+        <Button size="small" variation="primary" as={Link} to={`/checkin/${id}`}>Check In</Button>
+      )}
+      {status === 'checked-in' && (
+        <CheckoutButton bookingId={id}>Check out</CheckoutButton>
+      )}
+      <Flag src={guests.countryFlag} alt="flg" />
+      <Guest>{guests.fullName}</Guest>
+      <div>{numNights}</div>
+    </StyledTodayItem>
+  )
+}
